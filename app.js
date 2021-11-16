@@ -1,7 +1,7 @@
 // Carregando Módulos
     const express = require('express')
     const handlebars = require('express-handlebars')
-    const bodyParser = require('body-parser')
+    //const bodyParser = require('body-parser')
     const app = express()
     const admin = require('./routes/admin')
     const path = require('path')
@@ -12,21 +12,23 @@
 // Configurações
     //Sessão (Midware)
         app.use(session({
-            secret: 'cursodenode',
+            secret: "cursodenode",
             resave: true,
             saveUninitialized: true
         }))
         app.use(flash())
 
     // Midleware
-        app.use((req,res,next) => {
+        app.use((req, res, next) => {
             res.locals.success_msg = req.flash('success_msg')
-            res.locals.erros_msg = req.flash('error_msg')
+            res.locals.error_msg = req.flash('error_msg')
             next()
         })
     // Body Parser
-        app.use(bodyParser.urlencoded({extended: true}))
-        app.use(bodyParser.json())
+        //app.use(bodyParser.urlencoded({extended: true}))
+        //app.use(bodyParser.json())
+        app.use(express.urlencoded({extended: true}))
+        app.use(express.json())
     // Template Engine - Handlebars
         app.engine('handlebars',handlebars({defautLayout: 'main',
         runtimeOptions: {

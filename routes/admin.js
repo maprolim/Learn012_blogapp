@@ -19,6 +19,7 @@ router.get('/categorias', (req,res) => {
         res.render('admin/categorias', {categorias: categorias})
     }).catch((err) => {
         req.flash('error_msg', 'Houve um erro ao listar as categorias!')
+        console.log("Houve um erro ao listar as categorias: "+err)
         res.redirect('/admin')
     })
     
@@ -50,7 +51,8 @@ router.post('/categorias/nova', (req,res) => {
             req.flash('success_msg', "Categoria criada com sucesso!")
             res.redirect('/admin/categorias')
         }).catch((err) => {
-            req.flash('error_msg', "Ouve um erro ao salvar a categoria, tente novamente!")
+            req.flash('error_msg', "Houve um erro ao salvar a categoria, tente novamente!")
+            console.log("Houve um erro ao salvar a categoria: "+err)
             res.redirect('/admin/categorias')
         })
     }
@@ -62,6 +64,7 @@ router.get('/categorias/edit/:id', (req,res) => {
         res.render("admin/editcategorias", {categoria: categoria})
     }).catch((err) => {
         req.flash('error_msg', 'Esta categoria não existe')
+        console.log("Erro: Esta categoria não existe: "+err)
         res.redirect('/admin/categorias')
     })
     
@@ -97,6 +100,7 @@ router.post('/categorias/edit', (req,res) => {
     
         }).catch((err) => {
             req.flash('error_msg', 'Houve um erro ao editar a categoria!')
+            console.log("Houve um erro ao editar a categoria: "+err)
             res.redirect('/admin/categorias')        
         })
     }
@@ -125,6 +129,7 @@ router.post("/categorias/deletar", (req, res) => {
         res.redirect('/admin/categorias')     
     }).catch((err) => {
         req.flash('error_msg', 'Houve um erro ao deletar a categoria!')
+        console.log("Houve um erro ao deletar a categoria: "+err)
         res.redirect('/admin/categorias')        
     })
 })
@@ -137,13 +142,10 @@ router.get('/postagens/add', (req,res) => {
         res.render('admin/addpostagem', {categorias: categorias})
     }).catch((err) => {
         req.flash('error_msg', 'Houve um erro ao carregar o formulário!')
+        console.log("Houve um erro ao carregar o formulário: "+err)
         res.redirect('/admin')
     })
 })
-
-
-
-
 
 
 router.post('/postagens/nova', (req,res) => {
@@ -164,17 +166,14 @@ router.post('/postagens/nova', (req,res) => {
             categoria: req.body.categoria
         }
         new Postagem(novaPostagem).save().then(() => {
-            req.flash('success-msg', 'Postagem criada com sucesso!')
+            req.flash("success_msg", "Postagem criada com sucesso!")
             res.redirect('/admin/postagens')
         }).catch((err) => {
-            req.flash('error-msg', 'Ouve um erro ao salvar a postagem: Tente novamente!')
+            req.flash("error_msg", "Ouve um erro ao salvar a postagem: Tente novamente!")
+            console.log("Ouve um erro ao salvar a postagem: "+err)
             res.redirect('/admin/postagens')
         })
     }
 })
-
-
-
-
 
 module.exports = router
