@@ -1,0 +1,24 @@
+npm install express --save
+npm install express-handlebars --save
+npm install body-parser --save
+npm install mongoose --save (no lugar do sequelize)
+
+npm install express-session --save
+npm install connect-flash --save
+
+https://getbootstrap.com/
+
+
+
+
+
+
+npm install nodemon -g
+npm install sequelize --save
+npm install mysql2 --save
+mysql -h localhost -u root -p
+___________
+Comando MongoDB
+show collections;
+show databases;
+use loja; //Cria um banco chamado "loja"
